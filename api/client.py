@@ -16,16 +16,14 @@ def get_ollama_response(input_text):
         }
 
         response = requests.post(
-            "http://127.0.0.1:8000/essay/invoke",
+            "http://127.0.0.1:8000/essay/plain",
             json={'input': {'topic': input_text}}
         )
         response.raise_for_status()  # Raise error if HTTP status is not 2xx
-        data = response.json()
-        return data.get('output', 'No output returned')
+        return response.text
     except requests.exceptions.RequestException as e:
         return f"Error: {e}"
-    except ValueError:
-        return "Error: Invalid JSON response"
+    
     
 ##Streamlit framework
 
